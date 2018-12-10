@@ -32,12 +32,17 @@ namespace LabWindbgTTD
             {
                 MessageBox.Show(ex.Message);
             }
-            await Task.Run(BadCodeClosesFileUnexpectedly);
+            await Task.Run(BadCodeWaitAndClose);
         }
 
-        private async Task BadCodeClosesFileUnexpectedly()
+        private async Task BadCodeWaitAndClose()
         {
             await Task.Delay(TimeSpan.FromSeconds(5));
+            BadCodeClosesFileUnexpectedly();
+        }
+
+        private void BadCodeClosesFileUnexpectedly()
+        {
             LogFile.Dispose();
         }
     }
